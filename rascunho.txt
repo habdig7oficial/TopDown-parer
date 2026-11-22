@@ -1,0 +1,47 @@
+
+test('2', 'rand')
+test('-20', 'rand')
+test('(20)', 'rand')
+
+
+
+
+test_false('', 'Empty expression')
+test_false('(1+1', 'Unclosed Parenthesis')
+test_false('1+1)', 'Unopened Parenthesis')
+test_false(')1+1*2(', 'Unmached Parenthesis')
+test_false('1+2+3', 'Don\'t Match T that generates F ')
+
+my @alphabet = ('+', '-', '*', '/', '(', ')', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' ).flat;
+    
+
+
+     I -> S 
+
+     S -> TK 
+
+     K -> +TK 
+
+     K -> -TK 
+
+     K -> e 
+
+     T -> FZ 
+
+     Z -> *FZ 
+
+     Z -> /FZ 
+
+     Z -> e 
+
+     F -> (S) 
+
+     F -> N 
+
+     F -> -N 
+
+     N -> 1D|2D|3D|4D|5D|6D|7D|8D|9D 
+
+     D -> 0D|1D|2D|3D|4D|5D|6D|7D|8D|9D 
+
+     D -> e 

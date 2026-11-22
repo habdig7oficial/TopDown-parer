@@ -1,0 +1,46 @@
+use v6;
+use Test;
+use lib '.';
+use RkParser;
+
+sub test($input, $msg) {
+    my $res =  RkParser.parse($input);
+
+    say $res;
+    ok $res, $msg;
+
+    say "==================";
+}
+
+sub test_false($input, $msg) {
+    my $res =  RkParser.parse($input);
+
+    say $res;
+    nok $res, $msg;
+    say "==================";
+}
+
+
+# Valid Cases
+test('(1+1)', 'Balanced Parenthesis')
+test('(((((((((1)))))))))', 'Many Parenthesis')
+test('(1+1)+3', 'Composite Expresion')
+test('5*4+1*6', 'Alternated Symbols')
+test('(5*4)+(1*6)', 'Basic Bracket expression')
+test('(1--10)', 'K -> -TK, T -> FZ, F -> -N')
+test('(1+-10)', 'K -> -TK, T -> FZ, F -> -N')
+#test('10+20+30', '')
+
+
+
+
+# Invalid cases
+test_false('', 'Empty expression')
+test_false('(1+1', 'Unclosed Parenthesis')
+test_false('1+1)', 'Unopened Parenthesis')
+test_false(')1+1*2(', 'Unmached Parenthesis')
+test_false('1+2+3', 'Don\'t Match T that generates F ')
+
+
+
+done-testing;
